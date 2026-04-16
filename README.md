@@ -13,7 +13,7 @@ specialized native calls — skipping the generic cfunc dispatch path entirely.
 On JRuby and TruffleRuby the C extension is ignored and the original FFI code
 is used as-is, so gems that use FFX stay portable.
 
-This implementation is based off of work done by Max Bernstein and CF in
+This implementation is based off of work done by Max Bernstein and CF Bolz-Tereick in
 [DrWenowdis:Specializing Dynamic Language C Extensions using TypeInformation](https://bernsteinbear.com/assets/img/dr-wenowdis.pdf)
 
 ## Usage
