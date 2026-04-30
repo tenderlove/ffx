@@ -10,18 +10,31 @@
 #
 module FFX
   TYPES = {
-    void:   { byte:  0, c_type: "void" },
-    int:    { byte:  1, c_type: "int",           to_c: "NUM2INT(%s)",                  from_c: "INT2NUM(%s)" },
-    long:   { byte:  2, c_type: "long",          to_c: "NUM2LONG(%s)",                 from_c: "LONG2NUM(%s)" },
-    string: { byte:  3, c_type: "const char *",  to_c: "StringValueCStr(%s)",          from_c: "rb_str_new_cstr(%s)" },
-    uint:   { byte:  4, c_type: "unsigned int",  to_c: "NUM2UINT(%s)",                 from_c: "UINT2NUM(%s)" },
-    size_t: { byte:  5, c_type: "size_t",        to_c: "NUM2SIZET(%s)",                from_c: "SIZET2NUM(%s)" },
-    double: { byte:  6, c_type: "double",        to_c: "NUM2DBL(%s)",                  from_c: "DBL2NUM(%s)" },
-    float:  { byte:  7, c_type: "float",         to_c: "(float)NUM2DBL(%s)",           from_c: "DBL2NUM((double)%s)" },
-    pointer:{ byte:  8, c_type: "void *",        to_c: "(void *)NUM2ULL(%s)",          from_c: "ULL2NUM((unsigned long long)%s)" },
-    bool:   { byte:  9, c_type: "bool",          to_c: "(RTEST(%s) ? true : false)",   from_c: "((%s) ? Qtrue : Qfalse)" },
-    char:   { byte: 10, c_type: "char",          to_c: "(char)NUM2INT(%s)",            from_c: "INT2NUM((int)%s)" },
-    uchar:  { byte: 11, c_type: "unsigned char", to_c: "(unsigned char)NUM2UINT(%s)",  from_c: "UINT2NUM((unsigned int)%s)" },
+    void:       { byte:  0, c_type: "void" },
+    int:        { byte:  1, c_type: "int",                to_c: "NUM2INT(%s)",                   from_c: "INT2NUM(%s)" },
+    long:       { byte:  2, c_type: "long",               to_c: "NUM2LONG(%s)",                  from_c: "LONG2NUM(%s)" },
+    string:     { byte:  3, c_type: "const char *",       to_c: "StringValueCStr(%s)",           from_c: "rb_str_new_cstr(%s)" },
+    uint:       { byte:  4, c_type: "unsigned int",       to_c: "NUM2UINT(%s)",                  from_c: "UINT2NUM(%s)" },
+    size_t:     { byte:  5, c_type: "size_t",             to_c: "NUM2SIZET(%s)",                 from_c: "SIZET2NUM(%s)" },
+    double:     { byte:  6, c_type: "double",             to_c: "NUM2DBL(%s)",                   from_c: "DBL2NUM(%s)" },
+    float:      { byte:  7, c_type: "float",              to_c: "(float)NUM2DBL(%s)",            from_c: "DBL2NUM((double)%s)" },
+    pointer:    { byte:  8, c_type: "void *",             to_c: "(void *)NUM2ULL(%s)",           from_c: "ULL2NUM((unsigned long long)%s)" },
+    bool:       { byte:  9, c_type: "bool",               to_c: "(RTEST(%s) ? true : false)",    from_c: "((%s) ? Qtrue : Qfalse)" },
+    char:       { byte: 10, c_type: "char",               to_c: "(char)NUM2INT(%s)",             from_c: "INT2NUM((int)%s)" },
+    uchar:      { byte: 11, c_type: "unsigned char",      to_c: "(unsigned char)NUM2UINT(%s)",   from_c: "UINT2NUM((unsigned int)%s)" },
+    short:      { byte: 12, c_type: "short",              to_c: "(short)NUM2INT(%s)",            from_c: "INT2NUM((int)%s)" },
+    ushort:     { byte: 13, c_type: "unsigned short",     to_c: "(unsigned short)NUM2UINT(%s)",  from_c: "UINT2NUM((unsigned int)%s)" },
+    int8:       { byte: 14, c_type: "int8_t",             to_c: "(int8_t)NUM2INT(%s)",           from_c: "INT2NUM((int)%s)" },
+    uint8:      { byte: 15, c_type: "uint8_t",            to_c: "(uint8_t)NUM2UINT(%s)",         from_c: "UINT2NUM((unsigned int)%s)" },
+    int16:      { byte: 16, c_type: "int16_t",            to_c: "(int16_t)NUM2INT(%s)",          from_c: "INT2NUM((int)%s)" },
+    uint16:     { byte: 17, c_type: "uint16_t",           to_c: "(uint16_t)NUM2UINT(%s)",        from_c: "UINT2NUM((unsigned int)%s)" },
+    int32:      { byte: 18, c_type: "int32_t",            to_c: "(int32_t)NUM2INT(%s)",          from_c: "INT2NUM((int)%s)" },
+    uint32:     { byte: 19, c_type: "uint32_t",           to_c: "(uint32_t)NUM2UINT(%s)",        from_c: "UINT2NUM((unsigned int)%s)" },
+    int64:      { byte: 20, c_type: "int64_t",            to_c: "(int64_t)NUM2LL(%s)",           from_c: "LL2NUM((long long)%s)" },
+    uint64:     { byte: 21, c_type: "uint64_t",           to_c: "(uint64_t)NUM2ULL(%s)",         from_c: "ULL2NUM((unsigned long long)%s)" },
+    long_long:  { byte: 22, c_type: "long long",          to_c: "NUM2LL(%s)",                    from_c: "LL2NUM(%s)" },
+    ulong_long: { byte: 23, c_type: "unsigned long long", to_c: "NUM2ULL(%s)",                   from_c: "ULL2NUM(%s)" },
+    ulong:      { byte: 24, c_type: "unsigned long",      to_c: "NUM2ULONG(%s)",                 from_c: "ULONG2NUM(%s)" },
   }
 
   @modules = {}
@@ -122,6 +135,7 @@ module FFX
       c << "#include <string.h>\n"
       c << "#include <stdlib.h>\n"
       c << "#include <stdbool.h>\n"
+      c << "#include <stdint.h>\n"
       c << "#include <math.h>\n"
       Array(@headers).each { |h| c << "#include <#{h}>\n" }
       c << "\n"

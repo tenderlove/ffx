@@ -48,8 +48,9 @@ the extension, and install it.
 
 ## Supported types
 
-`void`, `int`, `uint`, `long`, `size_t`, `float`, `double`, `string`, `pointer`,
-`bool`, `char`, `uchar`
+`void`, `int`, `uint`, `long`, `ulong`, `size_t`, `float`, `double`, `string`,
+`pointer`, `bool`, `char`, `uchar`, `short`, `ushort`, `int8`, `uint8`, `int16`,
+`uint16`, `int32`, `uint32`, `int64`, `uint64`, `long_long`, `ulong_long`
 
 ## How it works
 
